@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import styles from '../styles/home.module.css';
+import Loader from './Loader';
 import Card from './Card';
 
 function Home(){
@@ -17,13 +19,14 @@ function Home(){
   }, [])
 
   return(
-    <div>
-      <Link to = '/add-property'>
-        <button> Add Property </button>
+    <div className={styles.parent}>
+      <h1 className={styles.header}> Welcome to Property-Lister! </h1>
+      <Link to = '/add-property' className={styles.link}>
+        <button className={styles.button}> Add Property </button>
       </Link>
       {
       (typeof propertyList[0]?.name === 'undefined')?(
-        <p> Fetching data</p>
+        <Loader/>
       )
       :(
         propertyList.map(property => (

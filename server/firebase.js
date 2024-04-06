@@ -1,5 +1,5 @@
 const { initializeApp } = require('firebase/app');
-const { getFirestore, doc, setDoc, collection, query, getDocs } = require('firebase/firestore');
+const { getFirestore, doc, setDoc, collection, query, getDocs, getDoc } = require('firebase/firestore');
 
 const firebaseConfig = {
   apiKey: "AIzaSyAm3cZBN0gzmA00JEgXC-PlrYIN-kTF_RI",
@@ -42,6 +42,20 @@ const getProperties = async(from, to) => {
   }
 }
 
+const getProperty = async(id, from, to) => {
+  try{
+    const docRef = doc(firestoreDb, "properties", id);
+    const docSnapshot = await getDoc(docRef);
+
+    if (docSnapshot.exists()) {
+      return docSnapshot.data();
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 
 
 const getFirebaseApp = () => app;
@@ -49,5 +63,6 @@ const getFirebaseApp = () => app;
 module.exports = {
   getFirebaseApp,
   addProperty,
+  getProperty,
   getProperties
 }

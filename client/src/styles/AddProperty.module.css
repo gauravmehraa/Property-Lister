@@ -1,0 +1,98 @@
+@font-face{
+  font-family: Inter;
+  src: url('../assets/fonts/Inter.ttf');
+}
+
+body{
+  padding: 0;
+  margin: 0;
+  padding-bottom: 30px;
+  background-color: #EEEEEE;
+}
+
+
+.parent{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+a{
+  text-decoration: none
+}
+
+.back{
+  font-family: Inter;
+  color: #222831;
+}
+
+.header{
+  font-family: Inter;
+  color: #222831;
+  text-align: center;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 40%;
+}
+
+.input{
+  margin: 20px 0;
+  border: none;
+  padding: 20px;
+  border-radius: 20px;
+  font-family: Inter;
+  font-size: medium;
+  outline: none;
+}
+
+.input [type=text],
+.input [type=email],
+.input [type=tel]{
+  font-family: Inter;
+  font-size: medium;
+}
+
+textarea{
+  resize: none;
+  outline: none;
+}
+
+::placeholder{
+  color: rgb(174, 174, 174);
+  font-family: Inter;
+  font-size: medium;
+}
+
+
+.image{
+  width: 50%;
+}
+
+.submit{
+  height: 50px;
+  width: 200px;
+  margin: 0 auto;
+  background-color: #76ABAE;
+  color: #EEEEEE;
+  font-size: medium;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: Inter;
+  transition: all 0.8s;
+}
+
+.submit:hover{
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 850px) {
+  .form{
+    width: 90%;
+  }
+}

@@ -1,0 +1,49 @@
+@font-face{
+  font-family: Inter;
+  src: url('../assets/fonts/Inter.ttf');
+}
+
+body{
+  padding: 0;
+  margin: 0;
+}
+
+
+.parent{
+  padding: 20px;
+  background-color: #EEEEEE;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header{
+  font-family: Inter;
+  color: #222831;
+  text-align: center;
+}
+
+.link{
+  justify-content: center;
+  display: flex;
+}
+
+
+.button{
+  height: 70px;
+  width: 70vw;
+  margin: 0 auto;
+  background-color: #76ABAE;
+  color: #EEEEEE;
+  font-size: larger;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: Inter;
+  transition: all 0.8s;
+}
+
+.button:hover{
+  transform: scale(1.1);
+}

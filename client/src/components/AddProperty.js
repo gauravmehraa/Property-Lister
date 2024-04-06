@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import styles from "../styles/AddProperty.module.css"
+import { Link } from 'react-router-dom';
+import styles from "../styles/addproperty.module.css"
 
 function AddProperty(){
 
   const [formData, setFormData] = useState({});
-  const [image, setImage] = useState();
+  const [image1, setImage1] = useState();
+  const [image2, setImage2] = useState();
+  const [image3, setImage3] = useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,14 +20,19 @@ function AddProperty(){
         body: JSON.stringify(formData),
       });
       const responseData = await response.json();
+      console.log(responseData);
+      alert("Property successfully added");
+      document.getElementById("add-form").reset();
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
   const handleChange = (e) => {
-    if(e.target.name === 'image'){
-      setImage(URL.createObjectURL(e.target.files[0]));
+    if(e.target.name === 'image1' || e.target.name === 'image2' || e.target.name === 'image3'){
+      if(e.target.name === 'image1') setImage1(URL.createObjectURL(e.target.files[0]));
+      if(e.target.name === 'image2') setImage2(URL.createObjectURL(e.target.files[0]));
+      if(e.target.name === 'image3') setImage3(URL.createObjectURL(e.target.files[0]));
       const reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = () => {
@@ -37,8 +45,12 @@ function AddProperty(){
   };
 
   return(
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className={styles.parent}>
+      <Link to = '/'>
+        <h3 className={styles.back}>Go Back</h3>
+      </Link>
+      <h1 className={styles.header}>Add a Property</h1>
+      <form onSubmit={handleSubmit} className={styles.form} id="add-form">
         <input
           name="name"
           className={styles.input}
@@ -47,13 +59,22 @@ function AddProperty(){
           onChange={handleChange}
         />
         <input
-          name="info"
+          name="overview"
           className={styles.input}
           type="text"
-          placeholder='Information'
+          placeholder='Brief Overview'
           onChange={handleChange}
         />
-        <input
+        <textarea
+          name="info"
+          rows="10"
+          className={styles.input}
+          type="text"
+          placeholder='Detailed Information'
+          onChange={handleChange}
+        />
+        <textarea
+          rows="5"
           name="address"
           className={styles.input}
           type="text"
@@ -75,13 +96,29 @@ function AddProperty(){
           onChange={handleChange}
         />
         <input
-          name="image"
+          name="image1"
           className={styles.input}
           type="file"
           placeholder='Property Image'
           onChange={handleChange}
         />
-        {image && <img src={image} alt="Property"/>}
+        {image1 && <img src={image1} className={styles.image} alt="Property"/>}
+        <input
+          name="image2"
+          className={styles.input}
+          type="file"
+          placeholder='Property Image'
+          onChange={handleChange}
+        />
+        {image2 && <img src={image2} className={styles.image} alt="Property"/>}
+        <input
+          name="image3"
+          className={styles.input}
+          type="file"
+          placeholder='Property Image'
+          onChange={handleChange}
+        />
+        {image3 && <img src={image3} className={styles.image} alt="Property"/>}
         <button type="submit" className={styles.submit}> Add Property </button>
       </form>
     </div>
