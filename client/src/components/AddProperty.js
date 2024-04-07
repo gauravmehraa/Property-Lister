@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from "../styles/addproperty.module.css"
 
 function AddProperty(){
@@ -8,6 +8,7 @@ function AddProperty(){
   const [image1, setImage1] = useState();
   const [image2, setImage2] = useState();
   const [image3, setImage3] = useState();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +23,7 @@ function AddProperty(){
       const responseData = await response.json();
       console.log(responseData);
       alert("Property successfully added");
-      document.getElementById("add-form").reset();
+      navigate('/');
     } catch (error) {
       console.error('Error:', error);
     }
@@ -57,6 +58,7 @@ function AddProperty(){
           type="text"
           placeholder='Property Name'
           onChange={handleChange}
+          required
         />
         <input
           name="overview"
@@ -64,6 +66,7 @@ function AddProperty(){
           type="text"
           placeholder='Brief Overview'
           onChange={handleChange}
+          required
         />
         <textarea
           name="info"
@@ -72,6 +75,7 @@ function AddProperty(){
           type="text"
           placeholder='Detailed Information'
           onChange={handleChange}
+          required
         />
         <textarea
           rows="5"
@@ -80,6 +84,7 @@ function AddProperty(){
           type="text"
           placeholder='Address'
           onChange={handleChange}
+          required
         />
         <input
           name="email"
@@ -87,6 +92,7 @@ function AddProperty(){
           type="email"
           placeholder='Email'
           onChange={handleChange}
+          required
         />
         <input
           name="phone"
@@ -94,6 +100,7 @@ function AddProperty(){
           type="tel"
           placeholder='Phone Number'
           onChange={handleChange}
+          required
         />
         <input
           name="image1"
@@ -101,6 +108,7 @@ function AddProperty(){
           type="file"
           placeholder='Property Image'
           onChange={handleChange}
+          required
         />
         {image1 && <img src={image1} className={styles.image} alt="Property"/>}
         <input
@@ -109,6 +117,7 @@ function AddProperty(){
           type="file"
           placeholder='Property Image'
           onChange={handleChange}
+          required
         />
         {image2 && <img src={image2} className={styles.image} alt="Property"/>}
         <input
@@ -117,6 +126,7 @@ function AddProperty(){
           type="file"
           placeholder='Property Image'
           onChange={handleChange}
+          required
         />
         {image3 && <img src={image3} className={styles.image} alt="Property"/>}
         <button type="submit" className={styles.submit}> Add Property </button>

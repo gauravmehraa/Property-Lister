@@ -18,8 +18,9 @@ body{
   justify-content: center;
 }
 
-a{
-  text-decoration: none
+a, a:active, a:hover, a:visited{
+  text-decoration: none;
+  color: white;
 }
 
 .back{
@@ -76,7 +77,7 @@ textarea{
 .submit{
   height: 50px;
   width: 200px;
-  margin: 0 auto;
+  margin: 20px auto;
   background-color: #76ABAE;
   color: #EEEEEE;
   font-size: medium;

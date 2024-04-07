@@ -12,7 +12,7 @@ function Card({property}){
         <div className={styles.right}>
           <div className={styles.name}> {property.name} </div>
           <div className={styles.overview}> {property.overview} </div>
-          <div className={styles.address}> {property.address} </div>
+          <div className={styles.address}> Location - {property.address} </div>
         </div>
       </div>
     </Link>
