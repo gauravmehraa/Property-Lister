@@ -1,6 +1,6 @@
 const { initializeApp } = require('firebase/app');
 const { getFirestore, doc, setDoc, collection, query, getDocs, getDoc } = require('firebase/firestore');
-const { getStorage, ref, uploadBytes, getDownloadURL } = require('firebase/storage');
+const { getStorage, ref, uploadBytes, uploadBytesResumable, getDownloadURL } = require('firebase/storage');
 
 const firebaseConfig = {
   apiKey: "AIzaSyAm3cZBN0gzmA00JEgXC-PlrYIN-kTF_RI",
@@ -25,14 +25,20 @@ const addProperty = async (data, images, video) => {
       const imageName = `image${i}`;
       const imageFile = images[imageName][0];
       const imageRef = ref(storageRef, `${id}/${imageName}`);
-      await uploadBytes(imageRef, imageFile);
+      const metadata = {
+        contentType: imageFile.mimetype,
+      };
+      await uploadBytesResumable(imageRef, imageFile.buffer, metadata);
       const downloadURL = await getDownloadURL(imageRef);
       imageUrls.push(downloadURL);
     }
     
     const videoFile = video[0];
     const videoRef = ref(storageRef, `${id}/video`);
-    await uploadBytes(videoRef, videoFile);
+    const metadata = {
+      contentType: videoFile.mimetype,
+    };
+    await uploadBytesResumable(videoRef, videoFile.buffer, metadata);
     const videoUrl = await getDownloadURL(videoRef);
 
     data.images = imageUrls;

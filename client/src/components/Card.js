@@ -7,7 +7,7 @@ function Card({property}){
     <Link to = {`/property/${property.name.toLowerCase().replace(/\s+/g, '-')}`}>
       <div className={styles.parent}>
         <div className={styles.left}>
-          <img className={styles.image} src={property.image1} alt={property.name}/>
+          <img className={styles.image} src={property.images[0]} alt={property.name}/>
         </div>
         <div className={styles.right}>
           <div className={styles.name}> {property.name} </div>

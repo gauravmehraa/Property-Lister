@@ -26,9 +26,10 @@ function Property(){
       </Link>
         <h1 className={styles.header}> {property.name} </h1>
       <div className={styles.images}>
-        <img className={styles.image} src={property.image1} alt={property.name}/>
-        <img className={styles.image} src={property.image2} alt={property.name}/>
-        <img className={styles.image} src={property.image3} alt={property.name}/>
+        <img className={styles.image} src={property.images[0]} alt={property.name}/>
+        <img className={styles.image} src={property.images[1]} alt={property.name}/>
+        <img className={styles.image} src={property.images[2]} alt={property.name}/>
+        <iframe className={styles.video} title={property.name} src={property.video}></iframe>
       </div>
       <h1 className={styles.header}> About {property.name} </h1>
       <div className={styles.info}>{property.info} </div>
