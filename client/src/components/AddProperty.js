@@ -1,24 +1,33 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from "../styles/addproperty.module.css"
+import Loader from "./Loader";
 
 function AddProperty(){
 
   const [formData, setFormData] = useState({});
-  const [image1, setImage1] = useState();
-  const [image2, setImage2] = useState();
-  const [image3, setImage3] = useState();
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
+      const formDataWithFiles = new FormData();
+      formDataWithFiles.append('image1', formData.image1);
+      formDataWithFiles.append('image2', formData.image2);
+      formDataWithFiles.append('image3', formData.image3);
+      formDataWithFiles.append('video', formData.video);
+      formDataWithFiles.append('name', formData.name);
+      formDataWithFiles.append('overview', formData.overview);
+      formDataWithFiles.append('info', formData.info);
+      formDataWithFiles.append('address', formData.address);
+      formDataWithFiles.append('email', formData.email);
+      formDataWithFiles.append('phone', formData.phone);
+
       const response = await fetch('/api/data', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        body: formDataWithFiles,
       });
       const responseData = await response.json();
       console.log(responseData);
@@ -30,22 +39,16 @@ function AddProperty(){
   };
 
   const handleChange = (e) => {
-    if(e.target.name === 'image1' || e.target.name === 'image2' || e.target.name === 'image3'){
-      if(e.target.name === 'image1') setImage1(URL.createObjectURL(e.target.files[0]));
-      if(e.target.name === 'image2') setImage2(URL.createObjectURL(e.target.files[0]));
-      if(e.target.name === 'image3') setImage3(URL.createObjectURL(e.target.files[0]));
-      const reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onload = () => {
-        setFormData({ ...formData, [e.target.name]: reader.result });
-      }
-    }
-    else{
+    if (e.target.type === 'file') {
+      setFormData({ ...formData, [e.target.name]: e.target.files[0] });
+    } else {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }
   };
 
   return(
+    loading? <Loader text="Uploading data"/>
+    :
     <div className={styles.parent}>
       <Link to = '/'>
         <h3 className={styles.back}>Go Back</h3>
@@ -102,6 +105,7 @@ function AddProperty(){
           onChange={handleChange}
           required
         />
+        <h3 className={styles.header}>Upload Images</h3>
         <input
           name="image1"
           className={styles.input}
@@ -110,7 +114,6 @@ function AddProperty(){
           onChange={handleChange}
           required
         />
-        {image1 && <img src={image1} className={styles.image} alt="Property"/>}
         <input
           name="image2"
           className={styles.input}
@@ -119,7 +122,6 @@ function AddProperty(){
           onChange={handleChange}
           required
         />
-        {image2 && <img src={image2} className={styles.image} alt="Property"/>}
         <input
           name="image3"
           className={styles.input}
@@ -128,7 +130,15 @@ function AddProperty(){
           onChange={handleChange}
           required
         />
-        {image3 && <img src={image3} className={styles.image} alt="Property"/>}
+        <h3 className={styles.header}>Upload Video</h3>
+        <input
+          name="video"
+          className={styles.input}
+          type="file"
+          placeholder='Property Video'
+          onChange={handleChange}
+          required
+        />
         <button type="submit" className={styles.submit}> Add Property </button>
       </form>
     </div>

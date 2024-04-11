@@ -26,7 +26,7 @@ function Home(){
       </Link>
       {
       (typeof propertyList[0]?.name === 'undefined')?(
-        <Loader/>
+        <Loader text="Loading"/>
       )
       :(
         propertyList.map(property => (

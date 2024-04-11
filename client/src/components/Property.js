@@ -19,7 +19,7 @@ function Property(){
   }, [id])
 
   return(
-    (typeof property.name === 'undefined')? <Loader/>:
+    (typeof property.name === 'undefined')? <Loader text="Loading"/>:
     <div className={styles.parent}>
       <Link to = '/'>
         <h3 className={styles.back}>Go Back</h3>

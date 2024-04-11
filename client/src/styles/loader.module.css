@@ -4,7 +4,14 @@
   width: 100%;
   background-color: #EEEEEE;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: -6px;
+}
+
+.header{
+  font-family: Inter;
+  color: #222831;
+  text-align: center;
 }
